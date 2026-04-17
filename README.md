@@ -381,24 +381,7 @@ All filterbanks return `[n_filters][n_fft/2+1]` weight matrices.
 
 ---
 
-## Differences from Python Reference
 
-| Aspect | Python (`librosa` / `modules copy/`) | C++ (this library) |
-|---|---|---|
-| Pitch detection | `pyin` (probabilistic YIN + HMM) | Deterministic YIN |
-| CQT | True variable-window CQT | Power-summing approximation via large STFT |
-| Bark scale | Non-standard `6·log10(1+2πf/sr)` | Traunmuller formula |
-| Audio loading | `librosa.load` (resamples to 22050 Hz by default) | `libsndfile` at native sample rate |
-| Mel bands | 20 (for MFCC) | 20 |
-| Gammatone FB | Rectangular freq-domain approx | Same |
-| Vibrato detection | 4th-order Butterworth bandpass + `filtfilt` | FFT of smoothed F0, energy in 4–12 Hz bin range |
-| Delta coefficients | `librosa.feature.delta(width=9)` | Same algorithm, implemented natively |
-| `feat_prefix` closure bug | Python delta/delta-delta overwrote base stats with same keys | Fixed: separate `*_delta` / `*_delta2` struct fields |
-| Duplicate function in `pitch.py` | Second definition silently shadowed first | N/A (single implementation) |
-| `retun` typo in `cepstral.py` `fft()` | `SyntaxError` if called | N/A (function not ported; STFT handled by `fft_utils`) |
-| `gtcc`/`pncc` undefined variable bugs | `NameError` at runtime | Fixed: gammatone filter computed once and reused |
-
----
 
 ## Performance Tips for Raspberry Pi
 
