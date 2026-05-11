@@ -1,4 +1,4 @@
-# Nebula — Audio Feature Extraction Library
+# Nebula - Audio Feature Extraction Library
 
 C++17 library that extracts a comprehensive set of audio features from a mono/stereo audio file. A benchmark executable measures end-to-end latency for each **individual feature method** independently (e.g. MFCC, RASTA-PLP, CQT chroma, …). Designed for deployment on resource-constrained ARM targets (Raspberry Pi).
 
